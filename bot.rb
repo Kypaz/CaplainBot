@@ -9,6 +9,7 @@ token = config['token']
 $chat = config['chat']
 
 Telegram::Bot::Client.run(token) do |bot|
+  begin
   Thread.new do
     old_hash = 0
     while true do
@@ -21,7 +22,7 @@ Telegram::Bot::Client.run(token) do |bot|
         bot.api.send_message(chat_id: $chat, text: result)
       else
       end
-      sleep 60*60*5 #sleep10hours
+      sleep 60*60*4 #sleep4hours
     end
   end
   bot.listen do |message|
@@ -34,5 +35,9 @@ Telegram::Bot::Client.run(token) do |bot|
         bot.api.send_message(chat_id: message.chat.id, text: bulletin)
       end
     end
+  end
+  rescue Exception => e
+    puts e.message
+    puts e.backtrace.inspect
   end
 end
