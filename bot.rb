@@ -18,14 +18,14 @@ Telegram::Bot::Client.run(token) do |bot|
       while true do
         bulletin = get_bulletin()
         hash = Digest::SHA1.hexdigest(bulletin)
-        if ($dc.get(key_hash) == nil || $dc.get(key_hash) != hash)
+        if ($dc.get('hash') == nil || $dc.get('hash') != hash)
           new = "Nouveau bulletin ! \xF0\x9F\x98\x8C"
           result = new + "\n" + bulletin
-          $dc.set(key_hash,hash)
+          $dc.set('hash',hash)
           bot.api.send_message(chat_id: $chat, text: result)
         else
         end
-        sleep 60*60*3 #sleep3hours
+        sleep 60*60*2 #sleep2hours
       end
     end
     bot.listen do |message|
