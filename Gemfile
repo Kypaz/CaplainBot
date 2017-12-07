@@ -5,3 +5,4 @@ gem "telegram-bot-ruby"
 gem "nokogiri"
 gem 'parseconfig'
 gem 'digest'
+gem 'dalli'
